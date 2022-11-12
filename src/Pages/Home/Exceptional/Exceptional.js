@@ -3,7 +3,7 @@ import treatment from '../../../assets/images/treatment.png';
 
 const Exceptional = () => {
     return (
-        <div className="hero mx-32 mt-12 w-auto bg-base-50">
+        <div className="hero mb-16 mx-32 mt-12 w-auto bg-base-50">
             <div className="hero-content flex-col lg:flex-row">
                 <img src={treatment} className="max-w-sm rounded-lg shadow-2xl" alt='' />
                 <div className=' pl-12'>
