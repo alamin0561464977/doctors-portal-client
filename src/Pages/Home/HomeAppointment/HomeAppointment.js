@@ -5,11 +5,11 @@ import doctor from '../../../assets/images/doctor-small.png';
 const HomeAppointment = () => {
     return (
         <div className="hero" style={{ backgroundImage: `url("${appointment}")` }}>
-            <div className="hero-overlay bg-opacity-60"></div>
+            <div className="hero-overlay"></div>
             <div className="hero-content text-neutral-content">
                 <div className="hero mx-44 h-auto">
                     <div className="hero-content flex-col lg:flex-row">
-                        <img src={doctor} className="max-w-sm rounded-lg shadow-2xl h-[500px] pb-0 -mt-24" alt='' />
+                        <img src={doctor} className="max-w-sm sm:none rounded-lg shadow-2xl h-[500px] pb-0 -mt-24" alt='' />
                         <div className=' text-white ml-6'>
                             <p className='text-gl mb-8 font-bold text-primary'>Appointment</p>
                             <h1 className="text-5xl font-bold">Make an appointment Today</h1>
