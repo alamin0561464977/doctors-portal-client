@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../ContextAPI/UserContext';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    console.log(user)
     const NavItem = <>
         <li><Link className='font-bold mx-1' to='/'>Home</Link></li>
         <li><Link className='font-bold mx-1' to='/about'>About</Link></li>
         <li><Link className='font-bold mx-1' to='/appointment'>Appointment</Link></li>
         <li><Link className='font-bold mx-1' to='/reviews'>Reviews</Link></li>
         <li><Link className='font-bold mx-1' to='/contact-us'>Contact Us</Link></li>
-        <li><Link className='font-bold mx-1' to='/login'>Login</Link></li>
+        {
+            user?.uid ?
+                <li><button onClick={logOut} className='font-bold mx-1'>Log Out</button></li>
+                :
+                <li><Link className='font-bold mx-1' to='/login'>Login</Link></li>
+        }
     </>
     return (
         <div className="navbar bg-base-100">

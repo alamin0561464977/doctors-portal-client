@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { AuthContext } from '../../ContextAPI/UserContext';
 
 const Login = () => {
-    const [error, setError] = useState(null);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const [authError, setAuthError] = useState();
+    const { login, googleLogin } = useContext(AuthContext);
+
 
     const handelLogin = data => {
-        console.log(data)
+        login(data.email, data.password)
+            .then(({ user }) => {
+                console.log(user);
+                setAuthError(null);
+            })
+            .catch(err => {
+                console.log(err);
+                setAuthError(err.message);
+            })
+        reset();
     }
     return (
         <div className='w-[500px] p-8 rounded-lg mx-auto mt-12 bg-slate-100 shadow-xl'>
@@ -26,11 +38,11 @@ const Login = () => {
                 })}
                     className="input input-bordered font-bold w-full rounded-lg my-3" />
                 {errors.password && <p role="alert" className=' text-red-600'>{errors.password.message}</p>}
-                <p>Forgot Forgot <span className=' text-red-300 font-bold'> Password </span> ?</p>
                 {
-                    error &&
-                    <span className="label-text text-red-600 font-bold">auth</span>
+                    authError &&
+                    <span className="label-text text-red-600 font-bold">{authError}</span>
                 }
+                <p>Forgot Forgot <span className=' text-red-300 font-bold'> Password </span> ?</p>
                 <input type="submit"
                     className="input bg-slate-700 text-white input-border font-bold w-full rounded-lg my-3" />
             </form>
@@ -38,7 +50,7 @@ const Login = () => {
                 <Link className='font-bold ml-2 text-green-600' to='/sign-up'>Create new account</Link>
             </p>
             <div className="divider">OR</div>
-            <button className="btn text-xl w-full rounded-lg btn-outline">Google Login</button>
+            <button onClick={googleLogin} className="btn text-xl w-full rounded-lg btn-outline">Google Login</button>
         </div>
     );
 };
